@@ -5,7 +5,7 @@ export const Login = ({ onSubmit }) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     return (
-        <form onSubmit={handleSubmit(values => onSubmit(values))}>
+        <form aria-label="form" onSubmit={handleSubmit(values => onSubmit(values))}>
             <label htmlFor="email">E-mail</label>
             <input id="email" type="email" placeholder="E-mail" {...register('email', { required: 'E-mail is required' })} />
             {errors.email && <p role="alert">{errors.email.message}</p>}
