@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Login } from './index';
@@ -71,19 +71,28 @@ describe('<Login />', () => {
         expect(passwordErrorMsg).toBeInTheDocument();
     });
 
-    // test('Should call onSubmit when form is submited', () => {
-    //     const onSubmit = jest.fn();
+    test('Should call onSubmit when form is submited', async () => {
+        const onSubmit = jest.fn();
 
-    //     render(<Login onSubmit={onSubmit} />);
+        render(<Login onSubmit={onSubmit} />);
 
-    //     const emailField = screen.getByLabelText(/E-mail/i);
-    //     const passwordField = screen.getByLabelText(/Password/i);
-    //     const checkboxField = screen.getByLabelText(/Remember me/i);
+        const emailField = screen.getByLabelText(/E-mail/i);
+        const passwordField = screen.getByLabelText(/Password/i);
+        const checkboxField = screen.getByLabelText(/Remember me/i);
+        const submitButton = screen.getByRole('button', { name: /Login/i });
 
-    //     userEvent.type(emailField, fakeFormValues.email);
-    //     userEvent.type(passwordField, fakeFormValues.password);
-    //     userEvent.click(checkboxField);
+        userEvent.type(emailField, fakeFormValues.email);
+        userEvent.type(passwordField, fakeFormValues.password);
+        userEvent.click(checkboxField);
+        userEvent.click(submitButton);
 
-    //     expect(onSubmit).toHaveBeenCalledTimes(1);
-    // })
+        await waitFor(() => {
+            expect(onSubmit).toHaveBeenCalledTimes(1);
+            expect(onSubmit).toHaveBeenCalledWith({
+                email: 'teste@teste.com',
+                password: '123',
+                remember: true,
+            });
+        });
+    });
 });
