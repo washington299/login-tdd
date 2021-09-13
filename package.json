@@ -16,8 +16,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test",
+    "test:coverage": "yarn test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.js", "!src/index.js"]
   },
   "eslintConfig": {
     "extends": [
