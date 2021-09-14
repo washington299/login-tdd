@@ -1,4 +1,7 @@
 import { Login } from './components/Login';
+import GlobalStyles from './styles/globals';
+
+import * as S from './styles';
 
 function App() {
   const onSubmit = (values) => {
@@ -6,7 +9,12 @@ function App() {
   };
 
   return (
-    <Login onSubmit={onSubmit} />
+    <>
+      <GlobalStyles />
+      <S.Wrapper>
+        <Login onSubmit={onSubmit} />
+      </S.Wrapper>
+    </>
   );
 }
 
