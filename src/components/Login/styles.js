@@ -11,6 +11,13 @@ export const Wrapper = styled.form`
     background-color: var(--white);
 `;
 
+export const Title = styled.h1`
+    margin-bottom: var(--small-size);
+    font-size: var(--large-size);
+    font-weight: 500;
+    text-align: center;
+`;
+
 export const Field = styled.div`
     display: flex;
     flex-direction: column;

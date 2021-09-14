@@ -10,6 +10,14 @@ describe('<Login />', () => {
         password: '123',
     };
 
+    test('Should render Login title on the screen', () => {
+        render(<Login />);
+
+        const title = screen.getByRole('heading', { name: /login/i });
+
+        expect(title).toBeInTheDocument();
+    })
+
     test('Should render form fields on the screen', () => {
         render(<Login />);
     
