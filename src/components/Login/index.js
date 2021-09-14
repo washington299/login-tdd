@@ -1,23 +1,31 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import * as S from './styles';
+
 export const Login = ({ onSubmit }) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     return (
-        <form aria-label="form" onSubmit={handleSubmit(values => onSubmit(values))}>
-            <label htmlFor="email">E-mail</label>
-            <input id="email" type="email" placeholder="E-mail" {...register('email', { required: 'E-mail is required' })} />
-            {errors.email && <p role="alert">{errors.email.message}</p>}
+        <S.Wrapper aria-label="form" onSubmit={handleSubmit(values => onSubmit(values))}>
+            <S.Field>
+                <S.Label htmlFor="email">E-mail</S.Label>
+                <S.Input id="email" type="email" placeholder="E-mail" {...register('email', { required: 'E-mail is required' })} />
+                {errors.email && <S.Error role="alert">{errors.email.message}</S.Error>}
+            </S.Field>
 
-            <label htmlFor="password">Password</label>
-            <input id="password" type="password" placeholder="Password" {...register('password', { required: 'Password is required' })} />
-            {errors.password && <p role="alert">{errors.password.message}</p>}
+            <S.Field>
+                <S.Label htmlFor="password">Password</S.Label>
+                <S.Input id="password" type="password" placeholder="Password" {...register('password', { required: 'Password is required' })} />
+                {errors.password && <S.Error role="alert">{errors.password.message}</S.Error>}
+            </S.Field>            
 
-            <input id="remember" type="checkbox" {...register('remember')} />
-            <label htmlFor="remember">Remember me</label>
+            <S.Field row>
+                <input id="remember" type="checkbox" {...register('remember')} />
+                <S.Label htmlFor="remember" style={{ marginLeft: 5 }}>Remember me</S.Label>
+            </S.Field>
 
-            <button type="submit">Login</button>
-        </form>
+            <S.Button type="submit">Login</S.Button>
+        </S.Wrapper>
     )
 }
