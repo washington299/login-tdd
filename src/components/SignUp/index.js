@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { SignUpValidatePasswords } from '../../utils/validations';
@@ -7,15 +7,22 @@ import { SignUpValidatePasswords } from '../../utils/validations';
 import * as GE from '../../styles/globalElements';
 import * as S from './styles';
 
-export const SignUp = ({ onSubmit }) => {
+export const SignUp = () => {
     const [passwordsErrorMsg, setPasswordsErrorMsg] = useState('');
 
     const { register, formState: { errors }, handleSubmit }= useForm();
 
-    const submit = (values) => {
-        setPasswordsErrorMsg(SignUpValidatePasswords(values));
+    const history = useHistory();
 
-        onSubmit();
+    const submit = (values) => {
+        const passwordError = SignUpValidatePasswords(values);
+
+        if (passwordError.length > 0) {
+            setPasswordsErrorMsg(passwordError);
+            return;
+        }
+
+        history.push('/');
     }
 
     return (

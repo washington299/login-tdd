@@ -8,7 +8,7 @@ import { SignUp } from './index';
 const SignUpComponent = () => {
     return (
         <BrowserRouter>
-            <SignUp onSubmit={() => {}} />
+            <SignUp />
         </BrowserRouter>
     )
 }
