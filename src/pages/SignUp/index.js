@@ -5,7 +5,7 @@ import * as S from './styles';
 export const SignUpPage = () => {
     return (
         <S.Wrapper>
-            <SignUp />
+            <SignUp onSubmit={() => {}} />
         </S.Wrapper>
     )
 }

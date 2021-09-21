@@ -8,7 +8,7 @@ import { SignUp } from './index';
 const SignUpComponent = () => {
     return (
         <BrowserRouter>
-            <SignUp />
+            <SignUp onSubmit={() => {}} />
         </BrowserRouter>
     )
 }
@@ -54,6 +54,26 @@ describe('<SignUp />', () => {
         expect(emailErrorMsg).toBeInTheDocument();
         expect(passwordErrorMsg).toBeInTheDocument();
         expect(confirmPasswordErrorMsg).toBeInTheDocument();
+    });
+
+    test('Should show an error if passwords does not match', async () => {
+        render(<SignUpComponent />);
+
+        const username = screen.getByLabelText(/username/i);
+        const email = screen.getByLabelText(/E-mail/i);
+        const password = screen.getByLabelText('Password');
+        const confirmPassword = screen.getByLabelText('Confirm password');
+        const submitButton = screen.getByRole('button', { name: /Sign Up/i });
+
+        userEvent.type(username, 'teste');
+        userEvent.type(email, 'teste@teste.com');
+        userEvent.type(password, '123');
+        userEvent.type(confirmPassword, '321');
+        userEvent.click(submitButton);
+
+        const passwordsErrorMsg = await screen.findByText(/Passwords does not match/i);
+
+        expect(passwordsErrorMsg).toBeInTheDocument();
     });
 
     test('Should login link has correct path', async () => {

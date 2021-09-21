@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 import { SignUpPage } from './index';
 
-const LoginComponent = () => {
+const SignUpComponent = () => {
     return (
         <BrowserRouter>
             <SignUpPage />
@@ -14,7 +14,7 @@ const LoginComponent = () => {
 
 describe('<SignUpPage />', () => {
     test('Should render signUp form on the screen', () => {
-        render(<LoginComponent />);
+        render(<SignUpComponent />);
 
         const signUpForm = screen.getByRole('form');
 
