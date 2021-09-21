@@ -31,7 +31,7 @@ export const Login = ({ onSubmit }) => {
 
                 <S.Button type="submit">Login</S.Button>
 
-                <Link to="/signup">Signup here</Link>
+                <Link to="/signup">Sign Up here</Link>
             </S.Wrapper>
         </>
     )

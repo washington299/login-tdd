@@ -8,7 +8,7 @@ export const SignUp = () => {
 
     return (
         <S.Wrapper onSubmit={handleSubmit(() => {})}>
-            <S.Title>SignUp</S.Title>
+            <S.Title>Sign Up</S.Title>
 
             <S.Field>
                 <S.Label htmlFor="username">Username</S.Label>
@@ -34,7 +34,7 @@ export const SignUp = () => {
                 {errors.confirmPassword && <S.Error>{errors.confirmPassword.message}</S.Error>}
             </S.Field>
 
-            <S.Button type="submit">SignUp</S.Button>
+            <S.Button type="submit">Sign Up</S.Button>
         </S.Wrapper>
     )
 }

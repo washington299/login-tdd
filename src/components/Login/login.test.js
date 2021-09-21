@@ -35,7 +35,7 @@ describe('<Login />', () => {
         const emailField = screen.getByLabelText(/E-mail/i);
         const passwordField = screen.getByLabelText(/Password/i);
         const checkboxField = screen.getByLabelText(/Remember me/i);
-        const signupLink = screen.getByText(/Signup here/i);
+        const signupLink = screen.getByText(/Sign Up here/i);
     
         expect(emailField).toBeInTheDocument();
         expect(passwordField).toBeInTheDocument();
@@ -129,7 +129,7 @@ describe('<Login />', () => {
     test('Should signUp link has correct path', async () => {
         render(<LoginComponent />);
 
-        const signUpLink = screen.getByText(/Signup here/i);
+        const signUpLink = screen.getByText(/Sign Up here/i);
 
         expect(signUpLink).toHaveAttribute('href', '/signup');
     })

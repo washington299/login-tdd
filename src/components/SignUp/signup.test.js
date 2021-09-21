@@ -17,7 +17,7 @@ describe('<SignUp />', () => {
     test('Should render SignUp title on the screen', () => {
         render(<SignUpComponent />);
 
-        const title = screen.getByRole('heading', { name: /SignUp/i });
+        const title = screen.getByRole('heading', { name: /Sign Up/i });
 
         expect(title).toBeInTheDocument();
     })
@@ -39,7 +39,7 @@ describe('<SignUp />', () => {
     test('Should show errors message when form is submit with empty fields', async () => {
         render(<SignUpComponent />);
 
-        const buttonSubmit = screen.getByRole('button', { name: 'SignUp' });
+        const buttonSubmit = screen.getByRole('button', { name: /Sign Up/i });
 
         userEvent.click(buttonSubmit);
 
