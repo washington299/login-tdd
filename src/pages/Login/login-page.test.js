@@ -1,12 +1,23 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { LoginPage } from './index';
 
+const LoginComponent = () => {
+    return (
+        <BrowserRouter>
+            <LoginPage />
+        </BrowserRouter>
+    );
+};
+
 describe('<LoginPage />', () => {
+
+
     test('Should render login form on the screen', () => {
-        render(<LoginPage />);
+        render(<LoginComponent />);
 
         const loginForm = screen.getByRole('form');
 
@@ -16,7 +27,7 @@ describe('<LoginPage />', () => {
     test('Should alert when submit login form', async () => {
         const alertMock = jest.spyOn(window, 'alert').mockImplementation();
 
-        render(<LoginPage />);
+        render(<LoginComponent />);
 
         const emailField = screen.getByLabelText(/E-mail/i);
         const passwordField = screen.getByLabelText(/Password/i);

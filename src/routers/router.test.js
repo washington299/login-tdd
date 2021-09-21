@@ -5,15 +5,19 @@ import { Router } from 'react-router-dom';
 
 import { Router as RouterPage } from './router';
 
+const RouterComponent = () => {
+    const history = createMemoryHistory();
+
+    return (
+        <Router history={history}>
+            <RouterPage />
+        </Router>
+    )
+}
+
 describe('<Router />', () => {
     test('Should render home page correctly', () => {
-        const history = createMemoryHistory();
-
-        render(
-            <Router history={history}>
-                <RouterPage />
-            </Router>
-        );
+        render(<RouterComponent />);
 
         expect(screen.getByRole('heading', { name: /login/i })).toBeInTheDocument();
     });

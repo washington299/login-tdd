@@ -1,8 +1,17 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Login } from './index';
+
+const LoginComponent = () => {
+    return (
+        <BrowserRouter>
+            <Login />
+        </BrowserRouter>
+    );
+};
 
 describe('<Login />', () => {
     const fakeFormValues = {
@@ -11,7 +20,8 @@ describe('<Login />', () => {
     };
 
     test('Should render Login title on the screen', () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
 
         const title = screen.getByRole('heading', { name: /login/i });
 
@@ -19,19 +29,23 @@ describe('<Login />', () => {
     })
 
     test('Should render form fields on the screen', () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
     
         const emailField = screen.getByLabelText(/E-mail/i);
         const passwordField = screen.getByLabelText(/Password/i);
         const checkboxField = screen.getByLabelText(/Remember me/i);
+        const signupLink = screen.getByText(/Signup here/i);
     
         expect(emailField).toBeInTheDocument();
         expect(passwordField).toBeInTheDocument();
         expect(checkboxField).toBeInTheDocument();
+        expect(signupLink).toBeInTheDocument();
     });
 
     test('Should render email field with the correct value', () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
 
         const emailField = screen.getByLabelText(/E-mail/);
         userEvent.type(emailField, fakeFormValues.email);
@@ -40,7 +54,8 @@ describe('<Login />', () => {
     });
 
     test('Should render password field with the correct value', () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
 
         const passwordField = screen.getByLabelText(/Password/);
         userEvent.type(passwordField, fakeFormValues.password);
@@ -49,7 +64,8 @@ describe('<Login />', () => {
     });
 
     test('Should mark checkbox as checked when clicked', () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
 
         const checkboxField = screen.getByLabelText(/Remember me/i);
         userEvent.click(checkboxField);
@@ -58,7 +74,8 @@ describe('<Login />', () => {
     });
 
     test('Should show an error message when the email field is empty on submit', async () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
 
         const button = screen.getByRole('button', { name: 'Login' });
         userEvent.click(button);
@@ -69,7 +86,8 @@ describe('<Login />', () => {
     });
 
     test('Should show an error message when the password field is empty on submit', async () => {
-        render(<Login />);
+        render(<LoginComponent />);
+
 
         const button = screen.getByRole('button', { name: 'Login' });
         userEvent.click(button);
@@ -82,7 +100,11 @@ describe('<Login />', () => {
     test('Should call onSubmit when form is submited', async () => {
         const onSubmit = jest.fn();
 
-        render(<Login onSubmit={onSubmit} />);
+        render(
+            <BrowserRouter>
+                <Login onSubmit={onSubmit} />
+            </BrowserRouter>
+        );
 
         const emailField = screen.getByLabelText(/E-mail/i);
         const passwordField = screen.getByLabelText(/Password/i);
@@ -103,4 +125,12 @@ describe('<Login />', () => {
             });
         });
     });
+
+    test('Should signUp link has correct path', async () => {
+        render(<LoginComponent />);
+
+        const signUpLink = screen.getByText(/Signup here/i);
+
+        expect(signUpLink).toHaveAttribute('href', '/signup');
+    })
 });

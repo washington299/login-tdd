@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import * as S from './styles';
@@ -29,6 +30,8 @@ export const Login = ({ onSubmit }) => {
                 </S.Field>
 
                 <S.Button type="submit">Login</S.Button>
+
+                <Link to="/signup">Signup here</Link>
             </S.Wrapper>
         </>
     )
