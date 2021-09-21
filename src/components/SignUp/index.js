@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import * as S from './styles';
@@ -7,7 +8,7 @@ export const SignUp = () => {
     const { register, formState: { errors }, handleSubmit }= useForm();
 
     return (
-        <S.Wrapper onSubmit={handleSubmit(() => {})}>
+        <S.Wrapper aria-label="form" onSubmit={handleSubmit(() => {})}>
             <S.Title>Sign Up</S.Title>
 
             <S.Field>
@@ -35,6 +36,8 @@ export const SignUp = () => {
             </S.Field>
 
             <S.Button type="submit">Sign Up</S.Button>
+
+            <Link to="/">Go to login</Link>
         </S.Wrapper>
     )
 }

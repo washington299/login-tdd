@@ -29,11 +29,13 @@ describe('<SignUp />', () => {
         const email = screen.getByLabelText(/E-mail/i);
         const password = screen.getByLabelText('Password');
         const confirmPassword = screen.getByLabelText('Confirm password');
+        const loginLink = screen.getByRole('link', { name: /Go to login/i });
         
         expect(username).toBeInTheDocument();
         expect(email).toBeInTheDocument();
         expect(password).toBeInTheDocument();
         expect(confirmPassword).toBeInTheDocument();
+        expect(loginLink).toBeInTheDocument();
     });
 
     test('Should show errors message when form is submit with empty fields', async () => {
@@ -53,4 +55,12 @@ describe('<SignUp />', () => {
         expect(passwordErrorMsg).toBeInTheDocument();
         expect(confirmPasswordErrorMsg).toBeInTheDocument();
     });
+
+    test('Should login link has correct path', async () => {
+        render(<SignUpComponent />);
+
+        const signUpLink = screen.getByText(/Go to login/i);
+
+        expect(signUpLink).toHaveAttribute('href', '/');
+    })
 })
