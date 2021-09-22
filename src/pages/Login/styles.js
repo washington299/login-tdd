@@ -8,5 +8,6 @@ export const Wrapper = styled.section`
     justify-content: center;
     align-items: center;
 
+    padding: 0 var(--small-size);
     background-color: var(--primary-color);
 `;
