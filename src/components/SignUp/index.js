@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { SignUpValidatePasswords } from '../../utils/validations';
-
 import * as GE from '../../styles/globalElements';
 import * as S from './styles';
 
@@ -15,10 +13,8 @@ export const SignUp = () => {
     const history = useHistory();
 
     const submit = (values) => {
-        const passwordError = SignUpValidatePasswords(values);
-
-        if (passwordError.length > 0) {
-            setPasswordsErrorMsg(passwordError);
+        if (values.password !== values.confirmPassword) {
+            setPasswordsErrorMsg('Passwords does not match');
             return;
         }
 

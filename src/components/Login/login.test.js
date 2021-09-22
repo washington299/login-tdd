@@ -22,15 +22,13 @@ describe('<Login />', () => {
     test('Should render Login title on the screen', () => {
         render(<LoginComponent />);
 
-
         const title = screen.getByRole('heading', { name: /login/i });
 
         expect(title).toBeInTheDocument();
-    })
+    });
 
     test('Should render form fields on the screen', () => {
         render(<LoginComponent />);
-
     
         const emailField = screen.getByLabelText(/E-mail/i);
         const passwordField = screen.getByLabelText(/Password/i);
@@ -43,57 +41,16 @@ describe('<Login />', () => {
         expect(signupLink).toBeInTheDocument();
     });
 
-    test('Should render email field with the correct value', () => {
+    test('Should show an error message when there are fields empty on submit', async () => {
         render(<LoginComponent />);
-
-
-        const emailField = screen.getByLabelText(/E-mail/);
-        userEvent.type(emailField, fakeFormValues.email);
-
-        expect(emailField).toHaveValue('teste@teste.com');
-    });
-
-    test('Should render password field with the correct value', () => {
-        render(<LoginComponent />);
-
-
-        const passwordField = screen.getByLabelText(/Password/);
-        userEvent.type(passwordField, fakeFormValues.password);
-
-        expect(passwordField).toHaveValue('123');
-    });
-
-    test('Should mark checkbox as checked when clicked', () => {
-        render(<LoginComponent />);
-
-
-        const checkboxField = screen.getByLabelText(/Remember me/i);
-        userEvent.click(checkboxField);
-
-        expect(checkboxField).toBeChecked();
-    });
-
-    test('Should show an error message when the email field is empty on submit', async () => {
-        render(<LoginComponent />);
-
 
         const button = screen.getByRole('button', { name: 'Login' });
         userEvent.click(button);
 
         const emailErrorMsg = await screen.findByText(/E-mail is required/i);
-
-        expect(emailErrorMsg).toBeInTheDocument();
-    });
-
-    test('Should show an error message when the password field is empty on submit', async () => {
-        render(<LoginComponent />);
-
-
-        const button = screen.getByRole('button', { name: 'Login' });
-        userEvent.click(button);
-
         const passwordErrorMsg = await screen.findByText(/Password is required/i);
 
+        expect(emailErrorMsg).toBeInTheDocument();
         expect(passwordErrorMsg).toBeInTheDocument();
     });
 
@@ -132,5 +89,5 @@ describe('<Login />', () => {
         const signUpLink = screen.getByText(/Sign Up here/i);
 
         expect(signUpLink).toHaveAttribute('href', '/signup');
-    })
+    });
 });
