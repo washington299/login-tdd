@@ -24,7 +24,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-    font-size: 16px;
+    font-size: var(--small-size);
     padding: var(--extra-small-size);
     border: 1px solid var(--gray);
     outline: none;

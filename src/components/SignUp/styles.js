@@ -11,7 +11,7 @@ export const Wrapper = styled.form`
     background-color: var(--white);
 
     a {
-        margin-top: 20px;
+        margin-top: var(--medium-size);
         text-decoration: none;
         text-align: center;
 
